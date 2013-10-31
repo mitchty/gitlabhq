@@ -15,21 +15,18 @@
 # Description:       GitLab git repository management
 ### END INIT INFO
 
-### Environment variables
-RAILS_ENV="production"
+# Source in any local config variables if there is a config file.
+GITLAB_CONFIG=${GITLAB_CONFIG:=/etc/gitlab.conf}
+[ -f ${GITLAB_CONFIG} ] && . ${GITLAB_CONFIG}
 
-# Script variable names should be lower-case not to conflict with internal
-# /bin/sh variables such as PATH, EDITOR or SHELL.
-app_user="git"
-app_root="/home/$app_user/gitlab"
-pid_path="$app_root/tmp/pids"
-socket_path="$app_root/tmp/sockets"
-web_server_pid_path="$pid_path/unicorn.pid"
-sidekiq_pid_path="$pid_path/sidekiq.pid"
-
-
-
-### Here ends user configuration ###
+### Set defaults if not overridden.
+RAILS_ENV=${RAILS_ENV:=production}
+app_root=${app_root:=/home/git/gitlab}
+app_user=${app_user:=git}
+pid_path=${pid_path:=${app_root}/tmp/pids}
+socket_path=${socket_path:=${app_root}/tmp/sockets}
+web_server_pid_path=${web_server_pid_path:=${pid_path}/unicorn.pid}
+sidekiq_pid_path=${sidekiq_pid_path:=${pid_path}/sidekiq.pid}
 
 
 # Switch to the app_user if it is not he/she who is running the script.
