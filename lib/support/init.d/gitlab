@@ -21,8 +21,8 @@ GITLAB_CONFIG=${GITLAB_CONFIG:=/etc/gitlab.conf}
 
 ### Set defaults if not overridden.
 RAILS_ENV=${RAILS_ENV:=production}
-app_root=${app_root:=/home/git/gitlab}
 app_user=${app_user:=git}
+app_root=${app_root:=/home/${app_user}/gitlab}
 pid_path=${pid_path:=${app_root}/tmp/pids}
 socket_path=${socket_path:=${app_root}/tmp/sockets}
 web_server_pid_path=${web_server_pid_path:=${pid_path}/unicorn.pid}
